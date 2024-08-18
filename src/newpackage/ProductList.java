@@ -106,7 +106,7 @@ public class ProductList {
     
     
     /*
-    Di chuyen khap tree list de tim product can xoa dua tren ID, ap dung cac
+    Di chuyen khap tree list d tim product can xoa dua tren ID, ap dung cac
     truong hop Node can xoa la: leaf node, has 1 childs, has 2 childs
     Truoc khi xoa can return product, neu khong tim thay product can xoa thi return null
     */
