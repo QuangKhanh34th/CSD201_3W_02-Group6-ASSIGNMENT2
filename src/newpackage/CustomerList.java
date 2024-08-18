@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package newpackage;
 
 /**
@@ -10,14 +6,14 @@ package newpackage;
  */
 public class CustomerList {
     public static class Customer {
-        //Attributes
+        // Attributes
         int customerID;
         String name;
         String phoneNumber;
         String address;
-        CustomerList next;
+        Customer next;
 
-        //Constructors
+        // Constructors
         public Customer() {
         }
 
@@ -28,8 +24,8 @@ public class CustomerList {
             this.address = address;
             this.next = null;
         }
-        
-        //Getters and Setters
+
+        // Getters and Setters
         public int getCustomerID() {
             return customerID;
         }
@@ -62,64 +58,83 @@ public class CustomerList {
             this.address = address;
         }
 
-        public CustomerList getNext() {
+        public Customer getNext() {
             return next;
         }
 
-        public void setNext(CustomerList next) {
+        public void setNext(Customer next) {
             this.next = next;
         }
-        
-        //display information method
+
+        // Display information method
         @Override
         public String toString() {
-            return ("CustomerID: " + customerID + "\nName: " + name + "\nPhone Number: " + phoneNumber + "\nAddress: " + address);
-        }     
+            return "CustomerID: " + customerID + "\nName: " + name + "\nPhone Number: " + phoneNumber + "\nAddress: " + address;
+        }
     }
-    //head node
+
+    // Head node
     private Customer head;
-    
-    //List's Methods
-    
-    /*
-    Them Customer va dat pointer head = customer neu danh sach dang trong,
-    khong trong thi dat customer vua tao vao pointer next cua customer tao 
-    truoc do
-    */
+
+    // Add a customer to the list
     public void add_customer(int customerID, String name, String phoneNumber, String address) {
-        
+        Customer newCustomer = new Customer(customerID, name, phoneNumber, address);
+        if (head == null) {
+            head = newCustomer;
+        } else {
+            Customer current = head;
+            while (current.next != null) {
+                current = current.next;
+            }
+            current.next = newCustomer;
+        }
     }
-    
-    
-    
-    /*
-    duyet tim customer can xoa bang ID, return customer bi xoa sau do
-    xoa customer, sau khi xoa update lai pointer head va next
-    cua customer phia sau customer da bi xoa. Neu khong tim thay customer
-    can xoa thi return null
-    */
+
+    // Remove a customer by ID and return the removed customer
     public Customer remove_customer(int customerID) {
-        return null;
+        if (head == null) {
+            return null; // List is empty
+        }
+
+        if (head.customerID == customerID) {
+            Customer removedCustomer = head;
+            head = head.next;
+            return removedCustomer;
+        }
+
+        Customer current = head;
+        while (current.next != null && current.next.customerID != customerID) {
+            current = current.next;
+        }
+
+        if (current.next == null) {
+            return null; // Customer not found
+        }
+
+        Customer removedCustomer = current.next;
+        current.next = current.next.next;
+        return removedCustomer;
     }
-    
-    
-    
-    /*
-    duyet tim customer bang ID, tim thay thi return customer, khong thi null
-    */
+
+    // Search for a customer by ID
     public Customer search_customer(int customerID) {
-        
-        return null;
+        Customer current = head;
+        while (current != null) {
+            if (current.customerID == customerID) {
+                return current;
+            }
+            current = current.next;
+        }
+        return null; // Customer not found
     }
-    
-    
-    
-    /*
-    display thong tin cua TAT CA customer co trong list dung ham toString,
-    da khai bao trong class Customer
-    */
+
+    // Display information for all customers in the list
     public void display_customers() {
-        
-    }    
-    
-}
+        Customer current = head;
+        while (current != null) {
+            System.out.println(current);
+            System.out.println("");
+            current = current.next;
+        }
+    }
+    }
