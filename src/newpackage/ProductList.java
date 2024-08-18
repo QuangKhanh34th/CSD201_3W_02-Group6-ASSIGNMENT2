@@ -130,14 +130,32 @@ public class ProductList {
     Cap nhat gia va so luong ton kho cua product, su dung productID
     de tim product trong tree list
     */
-    public void update_product(int productID, double price, int quantityInStock) {
-        
+    public boolean update_product(int productID, double price, int quantityInStock) {
+         // Tìm sản phẩm cần cập nhật
+    Product productToUpdate = search_product(productID);
+    
+    // Nếu sản phẩm tồn tại thì cập nhật thông tin
+    if (productToUpdate != null) {
+        productToUpdate.price = price;
+        productToUpdate.quantityInStock = quantityInStock;
+        return true; // Cập nhật thành công
+    }
+    
+    return false; // Không tìm thấy sản phẩm
     }
     
     
 
     //Su dung in-order Traversal de di khap tree list va in tung product co trong list
     public void display_products() {
-        
+         inOrderRec(root);
+    }
+    
+    private void inOrderRec(Product root) {
+        if (root != null) {
+            inOrderRec(root.left);
+            System.out.println("ID Product: " + root.productID + ", Name: " + root.name);
+            inOrderRec(root.right);
+        }
     }
 }
