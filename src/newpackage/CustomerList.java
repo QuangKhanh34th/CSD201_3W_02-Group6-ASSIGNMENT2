@@ -133,7 +133,8 @@ public class CustomerList {
         Customer current = head;
         while (current != null) {
             System.out.println(current);
+            System.out.println("");
             current = current.next;
         }
     }
-}
+    }

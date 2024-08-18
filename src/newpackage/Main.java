@@ -38,7 +38,7 @@ public class Main {
         
         
         sc = new Scanner(System.in);
-        System.out.print("===Search for a customer===");
+        System.out.println("===Search for a customer===");
         System.out.print("Input customerID: ");
         customerID = sc.nextInt();
         System.out.println(customerList.search_customer(customerID).toString());
