@@ -137,33 +137,47 @@ public class ProductList {
     Truoc khi xoa can return product, neu khong tim thay product can xoa thi return null
     */
     public Product delete_product(Product root, int productID) {
-        if (this.root == null) {
-            return this.root;
+        if (root == null) {
+            return null;
         }
         
-        if (productID < this.root.getProductID()) {
-            this.root.setLeft(delete_product(this.root.getLeft(), productID));
-        } else if (productID > this.root.getProductID()) {
-            this.root.setRight(delete_product(this.root.getRight(), productID));
+        if (productID < root.getProductID()) {
+            root.setLeft(delete_product(root.getLeft(), productID));
+        } else if (productID > root.getProductID()) {
+            root.setRight(delete_product(root.getRight(), productID));
         } else {
-            if (this.root.getLeft() == null) {
-                return this.root.getRight();
-            } else if (this.root.getRight() == null) {
-                return this.root.getLeft();
+//            if (root.getLeft() == null) {
+//                return root.getRight();
+//            } else if (root.getRight() == null) {
+//                return root.getLeft();
+//            }
+//            
+//            root.setProductID(minValue(root.getRight()));
+//            root.setRight(delete_product(root.getRight(), root.getProductID()));
+            if (root.getLeft() == null && root.getRight() == null) {
+                root = null;
+            } else if (root.getLeft() == null) {
+                Product temp = root;
+                root = root.getRight();
+                temp = null;
+            } else if (root.getRight() == null) {
+                Product temp = root;
+                root = root.getLeft();
+                temp = null;
+            } else {
+                Product minProduct = minValue(root.getRight());
+                root.setProductID(minProduct.getProductID());
+                root.setRight(delete_product(root.getRight(), minProduct.getProductID()));
             }
-            this.root.setRight(minValue(this.root.getRight()));
-            this.root.setRight(delete_product(this.root.getRight(), this.root.getProductID()));
         }
         return root;
     }
     
-    private int minValue(Product root){
-        int min = this.root.getProductID();
-        while (this.root.getLeft() != null) {            
-            min = this.root.getLeft().getProductID();
-            this.root = this.root.getLeft();
+    private Product minValue(Product root) {
+        while (root.getLeft() != null) {            
+            root = root.getLeft();
         }
-        return min;
+        return root;
     }
     
     
@@ -172,14 +186,15 @@ public class ProductList {
     Di chuyen khap tree list de tim product dua tren ID
     */
     public Product search_product(Product root, int productID) {
-        if (this.root == null || this.root.getProductID() == productID) {
+        if (root == null || root.getProductID() == productID) {
             return root;
         }
         
         if (root.getProductID() > productID) {
             return search_product(root.getLeft(), productID);
+        } else {
+            return search_product(root.getRight(), productID);
         }
-        return search_product(root.getRight(), productID);
     }
     
     
