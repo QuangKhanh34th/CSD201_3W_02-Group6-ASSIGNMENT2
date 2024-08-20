@@ -90,6 +90,11 @@ public class ProductList {
         public void setRight(Product right) {
             this.right = right;
         }
+        
+        @Override
+        public String toString() {
+            return ("ProductID: " + productID + "\nProduct name: " + name + "\nBrand: " + brand + "\nPrice: " + price + "\nIn stock: " + quantityInStock + "\n");
+        }
     }
     
     //Root node
@@ -210,6 +215,6 @@ public class ProductList {
 
     //Su dung in-order Traversal de di khap tree list va in tung product co trong list
     public void display_products() {
-        
-    }
+
+    }   
 }
