@@ -100,7 +100,33 @@ public class ProductList {
     Them product, lay productID de lam du lieu chinh trong viec xep cay
     */
     public void insert_product(int productID, String name, String brand, double price, int quantityInStock) {
+        Product newProduct = new Product(productID, name, brand, price, quantityInStock);
         
+        if (root == null) {
+            root = newProduct;
+            return;
+        }
+        
+        Product current = root;
+        Product parent = null;
+        
+        while (true) {            
+            parent = current;
+            
+            if (productID < current.getProductID()) {
+                current = current.getLeft();
+                if (current == null) {
+                    parent.setLeft(newProduct);
+                    return;
+                }
+            } else {
+                current = current.getRight();
+                if (current == null) {
+                    parent.setRight(newProduct);
+                    return;
+                }
+            }
+        }
     }
     
     
@@ -110,9 +136,48 @@ public class ProductList {
     truong hop Node can xoa la: leaf node, has 1 childs, has 2 childs
     Truoc khi xoa can return product, neu khong tim thay product can xoa thi return null
     */
-    public Product delete_product(int productID) {
+    public Product delete_product(Product root, int productID) {
+        if (root == null) {
+            return null;
+        }
         
-        return null;
+        if (productID < root.getProductID()) {
+            root.setLeft(delete_product(root.getLeft(), productID));
+        } else if (productID > root.getProductID()) {
+            root.setRight(delete_product(root.getRight(), productID));
+        } else {
+//            if (root.getLeft() == null) {
+//                return root.getRight();
+//            } else if (root.getRight() == null) {
+//                return root.getLeft();
+//            }
+//            
+//            root.setProductID(minValue(root.getRight()));
+//            root.setRight(delete_product(root.getRight(), root.getProductID()));
+            if (root.getLeft() == null && root.getRight() == null) {
+                root = null;
+            } else if (root.getLeft() == null) {
+                Product temp = root;
+                root = root.getRight();
+                temp = null;
+            } else if (root.getRight() == null) {
+                Product temp = root;
+                root = root.getLeft();
+                temp = null;
+            } else {
+                Product minProduct = minValue(root.getRight());
+                root.setProductID(minProduct.getProductID());
+                root.setRight(delete_product(root.getRight(), minProduct.getProductID()));
+            }
+        }
+        return root;
+    }
+    
+    private Product minValue(Product root) {
+        while (root.getLeft() != null) {            
+            root = root.getLeft();
+        }
+        return root;
     }
     
     
@@ -120,9 +185,16 @@ public class ProductList {
     /*
     Di chuyen khap tree list de tim product dua tren ID
     */
-    public Product search_product(int productID) {
+    public Product search_product(Product root, int productID) {
+        if (root == null || root.getProductID() == productID) {
+            return root;
+        }
         
-        return null;
+        if (root.getProductID() > productID) {
+            return search_product(root.getLeft(), productID);
+        } else {
+            return search_product(root.getRight(), productID);
+        }
     }
     
     
