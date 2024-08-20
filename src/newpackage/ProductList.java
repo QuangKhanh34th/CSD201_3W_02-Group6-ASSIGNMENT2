@@ -90,6 +90,11 @@ public class ProductList {
         public void setRight(Product right) {
             this.right = right;
         }
+        
+        @Override
+        public String toString() {
+            return ("ProductID: " + productID + "\nProduct name: " + name + "\nBrand: " + brand + "\nPrice: " + price + "\nIn stock: " + quantityInStock + "\n");
+        }
     }
     
     //Root node
