@@ -63,7 +63,7 @@ public class Main {
         System.out.println("===Delete a product===");
         System.out.print("Input productID: ");
         productID = sc.nextInt();
-        System.out.println("Product removed: " + productList.delete_product(productID).name);
+        System.out.println("Product removed: " + productList.delete_product(productList.root, productID).name);
         System.out.println("");
         
         
@@ -71,7 +71,7 @@ public class Main {
         System.out.println("===Search for a product===");
         System.out.print("Input productID: ");
         productID = sc.nextInt();
-        System.out.println(productList.search_product(productID).toString());
+        System.out.println(productList.search_product(productList.root, productID).toString());
         System.out.println("");
         
         
@@ -86,7 +86,7 @@ public class Main {
         System.out.print("Input new quantity: ");
         int quantityInStock = sc.nextInt();
         productList.update_product(productID, price, quantityInStock);
-        System.out.println("Product's infos updated: " + productList.search_product(productID).toString());
+        System.out.println("Product's infos updated: " + productList.search_product(productList.root, productID).toString());
         System.out.println("");
         
         System.out.println("===Display products===");
@@ -96,7 +96,7 @@ public class Main {
         
         
         
-        //bruh 
+         
         //OrderList's functions presentation
         
     }
