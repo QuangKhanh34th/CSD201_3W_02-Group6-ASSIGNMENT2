@@ -90,6 +90,11 @@ public class ProductList {
         public void setRight(Product right) {
             this.right = right;
         }
+        
+        @Override
+        public String toString() {
+            return ("ProductID: " + productID + "\nProduct name: " + name + "\nBrand: " + brand + "\nPrice: " + price + " VND" + "\nIn stock: " + quantityInStock + "\n");
+        }
     }
     
     //Root node
@@ -204,7 +209,7 @@ public class ProductList {
     */
     public boolean update_product(int productID, double price, int quantityInStock) {
          // Tìm sản phẩm cần cập nhật
-    Product productToUpdate = search_product(productID);
+    Product productToUpdate = search_product(this.root, productID);
     
     // Nếu sản phẩm tồn tại thì cập nhật thông tin
     if (productToUpdate != null) {
@@ -226,7 +231,7 @@ public class ProductList {
     private void inOrderRec(Product root) {
         if (root != null) {
             inOrderRec(root.left);
-            System.out.println("ID Product: " + root.productID + ", Name: " + root.name);
+            System.out.println(root);
             inOrderRec(root.right);
         }
     }
