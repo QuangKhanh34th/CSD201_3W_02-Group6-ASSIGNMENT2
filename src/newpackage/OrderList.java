@@ -6,6 +6,7 @@ package newpackage;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.LinkedList;
 
 /**
  *
@@ -87,7 +88,7 @@ public class OrderList {
         
         @Override
         public String toString() {
-            return ("OrderID: " + orderID + "\nOrdered at: " + orderDate + "\nCustomer: " + customerList.search_customer(customerID).getName() + "\nProduct ordered: " + productList.search_product(productID).getName() + "\nQuantity ordered: " + quantityOrdered +"\n");
+            return ("OrderID: " + orderID + "\nOrdered at: " + orderDate + "\nCustomer: " + customerList.search_customer(customerID).getName() + "\nProduct ordered: " + productList.search_product(productList.root, productID).getName() + "\nQuantity ordered: " + quantityOrdered +"\n");
         }
     }
     
@@ -114,7 +115,7 @@ public class OrderList {
         }
         
         //reduce quantity of the ordered product
-        productList.search_product(productID).setQuantityInStock(productList.search_product(productID).getQuantityInStock() - quantityOrdered);
+        productList.search_product(productList.root, productID).setQuantityInStock(productList.search_product(productList.root, productID).getQuantityInStock() - quantityOrdered);
     }
     
     
@@ -145,7 +146,7 @@ public class OrderList {
         } else {  
             removedOrder = current.next;
             //return the quantity ordered
-            productList.search_product(removedOrder.getProductID()).setQuantityInStock(productList.search_product(removedOrder.getProductID()).getQuantityInStock() + removedOrder.quantityOrdered);
+            productList.search_product(productList.root,removedOrder.getProductID()).setQuantityInStock(productList.search_product(productList.root,removedOrder.getProductID()).getQuantityInStock() + removedOrder.quantityOrdered);
             current.next = current.next.next;  
             return removedOrder;
         }   
@@ -167,12 +168,36 @@ public class OrderList {
     
     
     public void display_orders_by_customer(int customerID) {
+        Order current = head;
         
+        //linked list for storing matched orders
+        LinkedList<Order> result = new LinkedList<>();
+        while (current != null) {
+            if (current.customerID == customerID) {
+                result.add(current);
+            }
+            current = current.next;
+        }
+        
+        //print out all matched orders
+        for (Order order : result) {
+            System.out.println(order);
+        }
     }
     
     
     
     public void display_orders_by_product(int productID) {
-        
+        Order current = head;
+        LinkedList<Order> result = new LinkedList<>();
+        while (current != null) {
+            if (current.productID == productID) {
+                result.add(current);
+            }
+            current = current.next;
+        }
+        for (Order order : result) {
+            System.out.println(order);
+        }
     }
 }
