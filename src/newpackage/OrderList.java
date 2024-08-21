@@ -165,7 +165,14 @@ public class OrderList {
         return null;
     }
     
-    
+    public void displayAll() {
+        Order current = head;
+        while (current != null) {
+            System.out.println(current);
+            System.out.println("");
+            current = current.next;
+        }
+    }
     
     public void display_orders_by_customer(int customerID) {
         Order current = head;

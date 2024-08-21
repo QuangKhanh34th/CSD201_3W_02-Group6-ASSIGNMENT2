@@ -9,6 +9,7 @@ public class CustomerList {
         // Attributes
         int customerID;
         String name;
+        String email;
         String phoneNumber;
         String address;
         Customer next;
@@ -17,9 +18,10 @@ public class CustomerList {
         public Customer() {
         }
 
-        public Customer(int customerID, String name, String phoneNumber, String address) {
+        public Customer(int customerID, String name, String email, String phoneNumber, String address) {
             this.customerID = customerID;
             this.name = name;
+            this.email = email;
             this.phoneNumber = phoneNumber;
             this.address = address;
             this.next = null;
@@ -41,7 +43,14 @@ public class CustomerList {
         public void setName(String name) {
             this.name = name;
         }
-
+        
+        public String getEmail() {
+            return email;
+        }
+        
+        public void setEmail(String email) {
+            this.email = email;
+        }
         public String getPhoneNumber() {
             return phoneNumber;
         }
@@ -69,7 +78,7 @@ public class CustomerList {
         // Display information method
         @Override
         public String toString() {
-            return "CustomerID: " + customerID + "\nName: " + name + "\nPhone Number: " + phoneNumber + "\nAddress: " + address;
+            return "CustomerID: " + customerID + "\nName: " + name + "\nEmail: " + email + "\nPhone Number: " + phoneNumber + "\nAddress: " + address;
         }
     }
 
@@ -77,8 +86,8 @@ public class CustomerList {
     private Customer head;
 
     // Add a customer to the list
-    public void add_customer(int customerID, String name, String phoneNumber, String address) {
-        Customer newCustomer = new Customer(customerID, name, phoneNumber, address);
+    public void add_customer(int customerID, String name, String email, String phoneNumber, String address) {
+        Customer newCustomer = new Customer(customerID, name, email, phoneNumber, address);
         if (head == null) {
             head = newCustomer;
         } else {

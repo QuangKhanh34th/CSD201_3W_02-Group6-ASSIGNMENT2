@@ -14,7 +14,7 @@ public class ProductList {
         int productID;
         String name;
         String brand;
-        double price;
+        long price;
         int quantityInStock;
         Product left;
         Product right;
@@ -24,7 +24,7 @@ public class ProductList {
         }
 
 
-        public Product(int productID, String name, String brand, double price, int quantityInStock) {
+        public Product(int productID, String name, String brand, long price, int quantityInStock) {
             this.productID = productID;
             this.name = name;
             this.brand = brand;
@@ -63,7 +63,7 @@ public class ProductList {
             return price;
         }
 
-        public void setPrice(double price) {
+        public void setPrice(long price) {
             this.price = price;
         }
 
@@ -99,16 +99,17 @@ public class ProductList {
     
     //Root node
     Product root;
-    
+    int size;
     //List's Methods
     /*
     Them product, lay productID de lam du lieu chinh trong viec xep cay
     */
-    public void insert_product(int productID, String name, String brand, double price, int quantityInStock) {
+    public void insert_product(int productID, String name, String brand, long price, int quantityInStock) {
         Product newProduct = new Product(productID, name, brand, price, quantityInStock);
         
         if (root == null) {
             root = newProduct;
+            size++;
             return;
         }
         
@@ -122,12 +123,14 @@ public class ProductList {
                 current = current.getLeft();
                 if (current == null) {
                     parent.setLeft(newProduct);
+                    size++;
                     return;
                 }
             } else {
                 current = current.getRight();
                 if (current == null) {
                     parent.setRight(newProduct);
+                    size++;
                     return;
                 }
             }
@@ -159,6 +162,7 @@ public class ProductList {
 //            
 //            root.setProductID(minValue(root.getRight()));
 //            root.setRight(delete_product(root.getRight(), root.getProductID()));
+            size--;
             if (root.getLeft() == null && root.getRight() == null) {
                 root = null;
             } else if (root.getLeft() == null) {
@@ -207,7 +211,7 @@ public class ProductList {
     Cap nhat gia va so luong ton kho cua product, su dung productID
     de tim product trong tree list
     */
-    public boolean update_product(int productID, double price, int quantityInStock) {
+    public boolean update_product(int productID, long price, int quantityInStock) {
          // Tìm sản phẩm cần cập nhật
     Product productToUpdate = search_product(this.root, productID);
     
