@@ -18,7 +18,7 @@ public class Main {
     public static void main(String args[]) {
         CustomerList customerList = new CustomerList();
         ProductList productList = new ProductList();
-        OrderList orderList = new OrderList();
+        OrderList orderList = new OrderList();        
         Scanner sc = new Scanner(System.in);
         
         //CustomerList's functions presentation
@@ -27,6 +27,7 @@ public class Main {
         customerList.add_customer(1002, "Tien", "0978565467", "An Duong");
         customerList.add_customer(1003, "Phuc", "5678356467", "An Hoach");
         customerList.add_customer(1004, "Minh", "3678960561", "Hoa Tan");
+        OrderList.customerList = customerList;
         
         
         int customerID;
@@ -56,6 +57,7 @@ public class Main {
         productList.insert_product(2000, "VivoBook X509JP", "Asus", 14990000, 5);
         productList.insert_product(2001, "MacBook Air 13", "Apple", 23390000, 500);
         productList.insert_product(2002, "Yoga Slim 7", "Levono", 30190000, 250);
+        OrderList.productList = productList;
         
         
         int productID;
