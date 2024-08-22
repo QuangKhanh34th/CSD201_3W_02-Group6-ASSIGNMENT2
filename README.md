@@ -35,4 +35,9 @@ update thay đổi lên repository chính trên GitHub
 Repository trên GitHub sẽ là nơi thường xuyên được cập nhật, khi nội dung trên repo được cập nhật, máy của bạn sẽ không tự động cập nhật những thay đổi đó, do đó cần phải thường xuyên cập nhật lại về máy
 của mình mỗi khi có commit mới để tiếp tục làm việc.
 
-Để có thể cập nhật nội dung từ repo chính, bạn cần vào GitHub Desktop, nhấn vào tab Repository sau đó nhấn Pull
+
+ B1: Truy cập vào branch cần cập nhật từ menu "Current branch"
+
+ B2: Nhấn vào tab "Branch" (ngay phía trên current branch), một danh sách các lựa chọn sẽ xuất hiện, nhấn vào "Merge into current branch"
+
+ B3: Chọn branch mà mình muốn gộp code vào branch của mình và nhấn "Create a merge commit"
